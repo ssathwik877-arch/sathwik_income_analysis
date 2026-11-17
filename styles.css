@@ -1340,4 +1340,102 @@ input[type="file"] {
         break-inside: avoid;
     }
 
+/* =====================================
+   FOUR COLOURFUL DASHBOARD SUMMARY CARDS
+===================================== */
+
+/* 1. TOTAL SALARY - BLUE */
+
+#p-dashboard .cards .stat:nth-child(1) {
+    background: linear-gradient(
+        135deg,
+        #edf5ff,
+        #dceaff
+    );
+
+    border: 1px solid #c9defa;
+}
+
+#p-dashboard .cards .stat:nth-child(1) label {
+    color: #4779b9;
+}
+
+#p-dashboard .cards .stat:nth-child(1) .val {
+    color: #2864a5;
+}
+
+
+/* 2. TOTAL SPENT - ORANGE */
+
+#p-dashboard .cards .stat:nth-child(2) {
+    background: linear-gradient(
+        135deg,
+        #fff6e9,
+        #ffead4
+    );
+
+    border: 1px solid #f6d9b7;
+}
+
+#p-dashboard .cards .stat:nth-child(2) label {
+    color: #c17a32;
+}
+
+#p-dashboard .cards .stat:nth-child(2) .val {
+    color: #c0782d;
+}
+
+
+/* 3. AMOUNT SAVED - GREEN */
+
+#p-dashboard .cards .stat:nth-child(3) {
+    background: linear-gradient(
+        135deg,
+        #eaf8ef,
+        #d7f1e1
+    );
+
+    border: 1px solid #c6e8d2;
+}
+
+#p-dashboard .cards .stat:nth-child(3) label {
+    color: #279365;
+}
+
+#p-dashboard .cards .stat:nth-child(3) .val {
+    color: #168653 !important;
+}
+
+
+/* 4. OVERSPENT - RED */
+
+#p-dashboard .cards .stat:nth-child(4) {
+    background: linear-gradient(
+        135deg,
+        #fff0f0,
+        #fce0e0
+    );
+
+    border: 1px solid #f2cccc;
+}
+
+#p-dashboard .cards .stat:nth-child(4) label {
+    color: #cb6262;
+}
+
+#p-dashboard .cards .stat:nth-child(4) .val {
+    color: #d34f56 !important;
+}
+
+
+/* HOVER EFFECT */
+
+#p-dashboard .cards .stat {
+    transition: all 0.25s ease;
+}
+
+#p-dashboard .cards .stat:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 8px 22px rgba(30, 70, 50, 0.10);
 }
