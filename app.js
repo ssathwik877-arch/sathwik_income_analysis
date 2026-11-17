@@ -8,8 +8,8 @@ const months = [
 ];
 
 const colors = [
-    '#5269e8', '#25a985', '#e9a23b', '#e56b83',
-    '#8b75d7', '#55a5c8', '#a4abc0', '#c28a54',
+    '#059669', '#10b981', '#34d399', '#e9a23b',
+    '#0f766e', '#60a5fa', '#a4abc0', '#c28a54',
     '#6c9b71', '#cf719d'
 ];
 
@@ -58,33 +58,52 @@ let d = new Date();
 let cy = d.getFullYear();
 let cm = d.getMonth();
 
+// YEARS: 2024 TO 2035
+function years() {
+    return Array.from(
+        { length: 12 },
+        (_, i) => 2035 - i
+    );
+}
+
 function persist() {
     localStorage.setItem(KEY, JSON.stringify(db));
     render();
 }
 
-// YEAR DROPDOWN: 2024 TO THE CURRENT YEAR
-function years() {
-    return Array.from(
-        { length: Math.max(0, cy - 2024 + 1) },
-        (_, i) => cy - i
-    );
-}
-
 function fill(id, arr, sel) {
-    $(id).innerHTML = arr.map((x, i) => `
-        <option
-            value="${typeof x === 'object' ? x.v : i}"
-            ${String(typeof x === 'object' ? x.v : i) === String(sel) ? 'selected' : ''}
-        >
-            ${typeof x === 'object' ? x.t : x}
-        </option>
-    `).join('');
+    $(id).innerHTML = arr.map((x, i) => {
+        const value = typeof x === 'object'
+            ? x.v
+            : typeof x === 'number'
+                ? x
+                : i;
+
+        const label = typeof x === 'object'
+            ? x.t
+            : x;
+
+        return `
+            <option
+                value="${value}"
+                ${String(value) === String(sel) ? 'selected' : ''}
+            >
+                ${label}
+            </option>
+        `;
+    }).join('');
 }
 
 function setup() {
     ['dashYear', 'monthYear', 'sy', 'ey'].forEach(id => {
-        fill(id, years(), $(id).value || cy);
+        const available = years();
+        const existing = Number($(id).value);
+
+        const selected = available.includes(existing)
+            ? existing
+            : Math.min(2035, Math.max(2024, cy));
+
+        fill(id, available, selected);
     });
 
     ['monthSelect', 'sm', 'em'].forEach(id => {
@@ -175,7 +194,7 @@ function render() {
 
     $('donut').style.background = totalExp
         ? `conic-gradient(${parts.join(',')})`
-        : '#edf0f5';
+        : '#e5e7eb';
 
     $('donutTotal').textContent = money(totalExp);
 
