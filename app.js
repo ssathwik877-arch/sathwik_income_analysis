@@ -1,3 +1,4 @@
+
 const KEY = 'sathwik_income_analysis_v1';
 
 const months = [
@@ -62,18 +63,12 @@ function persist() {
     render();
 }
 
-// YEAR DROPDOWN: 2024 TO 2100
+// YEAR DROPDOWN: 2024 TO THE CURRENT YEAR
 function years() {
-    return [
-        ...new Set([
-            ...Array.from(
-                { length: 77 },
-                (_, i) => 2024 + i
-            ),
-            ...db.salaries.map(x => +x.y),
-            ...db.expenses.map(x => +x.y)
-        ])
-    ].sort((a, b) => b - a);
+    return Array.from(
+        { length: Math.max(0, cy - 2024 + 1) },
+        (_, i) => cy - i
+    );
 }
 
 function fill(id, arr, sel) {
